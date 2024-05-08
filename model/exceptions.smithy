@@ -90,25 +90,25 @@ structure ServerTimeoutException with [BaseException] {
 @mixin
 structure BaseException {
     @httpHeader("x-amzn-ErrorType")
-    errorType: String,
+    errorType: String
 
     @httpHeader("Access-Control-Allow-Headers")
-    allowHeaders: String,
+    allowHeaders: String
 }
 
 @mixin
 operation BaseOperationErrors {
     errors: [
-        BadRequestException,
-        NotAuthorizedException,
-        ForbiddenException,
-        NotFoundException,
-        NotSupportedException,
-        UnprocessableContentException,
-        ThrottledException,
-        DependencyException,
-        InternalServerErrorException,
-        ServiceUnavailableException,
+        BadRequestException
+        NotAuthorizedException
+        ForbiddenException
+        NotFoundException
+        NotSupportedException
+        UnprocessableContentException
+        ThrottledException
+        DependencyException
+        InternalServerErrorException
+        ServiceUnavailableException
         ServerTimeoutException
     ]
 }

@@ -7,21 +7,19 @@ use aws.apigateway#mockIntegration
 @mockIntegration(
     passThroughBehavior: "never",
     requestTemplates: {
-        "application/json": "{\"statusCode\": 200}",
-        "application/x-amz-json-1.1": "{\"statusCode\": 200}"
+        "application/json": "{\"statusCode\": 200}"
     },
     responses: {
         default: {
             statusCode: "200",
             responseTemplates: {
-                "application/json": "{\"extendedRequestId\": \"$context.extendedRequestId\", \"query\": \"$input.params('query')\"}",
-                "application/x-amz-json-1.1": "{\"extendedRequestId\": \"$context.extendedRequestId\", \"query\": \"$input.params('query')\"}"
+                "application/json": "{\"extendedRequestId\": \"$context.extendedRequestId\", \"query\": \"$input.params('query')\"}"
             }
         }
     }
 )
 @readonly
-@http(code: 200, method: "GET", uri: "/sigv4/mock")
+@http(code: 200, method: "GET", uri: "/mock")
 @examples([
     {
         title: "example",
@@ -30,7 +28,7 @@ use aws.apigateway#mockIntegration
     }
 ])
 @documentation("Mock operation")
-operation MockSigv4 {
+operation Mock with [BaseOperationErrors] {
     input := with [MockQuery] {
         @required
         @httpQuery("query")

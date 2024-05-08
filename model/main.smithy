@@ -1,4 +1,4 @@
-$version: "2.0"
+$version: "2"
 
 namespace dev.stelo.foxbat
 
@@ -22,5 +22,6 @@ use aws.protocols#restJson1
 @sigv4(name: "execute-api")
 service Foxbat {
     version: "2018-05-10"
-    operations: [MockSigv4]
+    operations: [Mock]
+    resources: [DynamoProxyItem]
 }
