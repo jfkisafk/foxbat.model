@@ -1,0 +1,283 @@
+{
+  "version": "1.0",
+  "plugins": {
+    "openapi": {
+      "service": "dev.stelo.foxbat#Foxbat",
+      "keepUnusedComponents": true,
+      "forbidGreedyLabels": true,
+      "apiGatewayType": "REST",
+      "tags": true,
+      "jsonAdd": {
+        "/x-amazon-apigateway-gateway-responses/DEFAULT_4XX/responseTemplates": {
+          "application/json": "{\"message\": \"[$context.error.message] Bad Request. Please contact the service team with the request parameters and these response header values: date, x-amzn-requestid and x-amzn-errortype\"}"
+        },
+        "/x-amazon-apigateway-gateway-responses/DEFAULT_5XX/responseTemplates": {
+          "application/json": "{\"message\": \"[$context.error.message] Internal Server Error. Please contact the service team with the request parameters and these response header values: date, x-amzn-requestid and x-amzn-errortype\"}"
+        },
+        "/x-amazon-apigateway-gateway-responses/BAD_REQUEST_BODY": {
+          "statusCode": 400,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'BadRequestException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] $context.error.validationErrorString\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/BAD_REQUEST_PARAMETERS": {
+          "statusCode": 400,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'BadRequestException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] $context.error.validationErrorString\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/MISSING_AUTHENTICATION_TOKEN": {
+          "statusCode": 403,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'ForbiddenException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] Security access token was not provided.\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/UNAUTHORIZED": {
+          "statusCode": 401,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'NotAuthorizedException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] Security access token was invalid or expired.\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/ACCESS_DENIED": {
+          "statusCode": 403,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'ForbiddenException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": $context.error.messageString}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/EXPIRED_TOKEN": {
+          "statusCode": 403,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'ForbiddenException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": $context.error.messageString}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/INVALID_API_KEY": {
+          "statusCode": 403,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'ForbiddenException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] Bad api-key provided for the operation.\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/WAF_FILTERED": {
+          "statusCode": 403,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'ForbiddenException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] Request filtered through firewall due to invalid uri or source IP.\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/UNSUPPORTED_MEDIA_TYPE": {
+          "statusCode": 415,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'NotSupportedException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] Unsupported media type specified in Content-Type header.\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/QUOTA_EXCEEDED": {
+          "statusCode": 429,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'ThrottledException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] Rate limit exceeded for the operation (throttled).\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/THROTTLED": {
+          "statusCode": 429,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'ThrottledException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"[$context.error.message] Rate limit exceeded for the operation (throttled).\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/AUTHORIZER_FAILURE": {
+          "statusCode": 500,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'DependencyException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": \"Failed to validate security access token.\"}"
+          }
+        },
+        "/x-amazon-apigateway-gateway-responses/INTEGRATION_TIMEOUT": {
+          "statusCode": 504,
+          "headers": {
+            "Access-Control-Allow-Origin": {
+              "type": "string"
+            },
+            "Access-Control-Allow-Headers": {
+              "type": "string"
+            }
+          },
+          "responseParameters": {
+            "gatewayresponse.header.x-amzn-ErrorType": "'ServerTimeoutException'",
+            "gatewayresponse.header.Access-Control-Allow-Origin": "'*'",
+            "gatewayresponse.header.Access-Control-Allow-Headers": "'*'",
+            "gatewayresponse.header.Access-Control-Expose-Headers": "'x-amzn-errortype,x-amzn-requestid,x-amz-apigw-id,x-amzn-trace-id'"
+          },
+          "responseTemplates": {
+            "application/json": "{\"message\": $context.error.messageString}"
+          }
+        },
+        "/x-amazon-apigateway-endpoint-configuration": {
+          "disableExecuteApiEndpoint": true
+        }
+      }
+    }
+  }
+}
