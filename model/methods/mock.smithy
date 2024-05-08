@@ -5,13 +5,13 @@ namespace dev.stelo.foxbat
 use aws.apigateway#mockIntegration
 
 @mockIntegration(
-    passThroughBehavior: "never",
+    passThroughBehavior: "never"
     requestTemplates: {
         "application/json": "{\"statusCode\": 200}"
-    },
+    }
     responses: {
         default: {
-            statusCode: "200",
+            statusCode: "200"
             responseTemplates: {
                 "application/json": "{\"extendedRequestId\": \"$context.extendedRequestId\", \"query\": \"$input.params('query')\"}"
             }
@@ -22,9 +22,9 @@ use aws.apigateway#mockIntegration
 @http(code: 200, method: "GET", uri: "/mock")
 @examples([
     {
-        title: "example",
-        input: { query: "test" },
-        output: { query: "test", region: "us-west-2" }
+        title: "example"
+        input: { query: "test" }
+        output: { query: "test", extendedRequestId: "SYHzdEszvHcEiwA=" }
     }
 ])
 @documentation("Mock operation")
@@ -34,11 +34,11 @@ operation Mock with [BaseOperationErrors] {
         @httpQuery("query")
         @documentation("Query for the mock call")
         query: NonEmptyString
-    },
+    }
     output := with [MockQuery] {
         @required
-        @documentation("AWS region for the mock call")
-        region: NonEmptyString
+        @documentation("Extended RequestId for the mock call")
+        extendedRequestId: NonEmptyString
     }
 }
 
