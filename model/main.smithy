@@ -23,5 +23,5 @@ use aws.protocols#restJson1
 service Foxbat {
     version: "2018-05-10"
     operations: [Mock]
-    resources: [DynamoProxyItem]
+    resources: [DynamoProxyItem, S3ProxyItem]
 }

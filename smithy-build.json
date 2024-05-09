@@ -276,6 +276,34 @@
         },
         "/x-amazon-apigateway-endpoint-configuration": {
           "disableExecuteApiEndpoint": true
+        },
+        "/x-amazon-apigateway-policy": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": "*",
+              "Action": "execute-api:Invoke",
+              "Resource": [
+                "execute-api:/*"
+              ]
+            },
+            {
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "execute-api:Invoke",
+              "Resource": [
+                "execute-api:/*/GET/favicon*"
+              ],
+              "Condition" : {
+                "NotIpAddress": {
+                  "aws:SourceIp": [
+                    "192.168.50.51/32"
+                  ]
+                }
+              }
+            }
+          ]
         }
       }
     }

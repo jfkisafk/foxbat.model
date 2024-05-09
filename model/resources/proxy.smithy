@@ -52,3 +52,37 @@ structure DynamoProxyListItem for DynamoProxyItem with [DynamoProxyItemElements]
 list DynamoProxyItemList {
     member: DynamoProxyListItem
 }
+
+enum ContentType {
+    APPLICATION_JSON = "application/json"
+}
+
+resource S3ProxyItem {
+    identifiers: {
+        key: NonEmptyString
+    }
+
+    properties: {
+        content: NonEmptyString
+        contentType: ContentType
+        version: NonEmptyString
+    }
+
+    put: PutS3ProxyItem
+    read: GetS3ProxyItem
+}
+
+@mixin
+structure S3ProxyItemKey for S3ProxyItem {
+    @required
+    @httpLabel
+    @documentation("Key for the S3 object")
+    $key
+}
+
+@mixin
+structure S3ProxyItemContent for S3ProxyItem {
+    @recommended
+    @documentation("Content/data for the object")
+    $content
+}

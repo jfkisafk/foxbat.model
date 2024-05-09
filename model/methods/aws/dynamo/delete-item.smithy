@@ -7,26 +7,22 @@ use aws.apigateway#integration
 @integration(
     type: "aws"
     httpMethod: "POST"
-    uri: "arn:aws:apigateway:${AWS::Region}:dynamodb:action/UpdateItem"
+    uri: "arn:aws:apigateway:${AWS::Region}:dynamodb:action/DeleteItem"
     credentials: "${ApiExecutionRole.Arn}"
     passThroughBehavior: "never"
     requestTemplates: {
         "application/json": """
-        #set($ttl = $context.requestTimeEpoch / 1000 + 15552000)
         {
             "TableName": "$stageVariables.proxyTableName",
-            "Key": { "itemId": { "S": "$context.extendedRequestId" } },
-            "ConditionExpression": "attribute_not_exists(itemId)"
-            "UpdateExpression": "SET #count = if_not_exists(#count, :start) + :inc, #createdAt = :timestamp, #lastModifiedAt = :timestamp, #ttl = :ttl",
-            "ExpressionAttributeValues": { ":inc": { "N": "1" }, ":start": { "N": "0" }, ":timestamp": { "S": "$context.requestTime" }, ":ttl": { "N": "$ttl" } },
-            "ExpressionAttributeNames": { "#count": "count", "#createdAt": "createdAt", "#lastModifiedAt": "lastModifiedAt", "#ttl": "expiresAt" },
-            "ReturnValues": "ALL_NEW"
+            "Key": { "itemId": { "S": "$method.request.path.itemId" } },
+            "ConditionExpression": "attribute_exists(itemId)"
+            "ReturnValues": "ALL_OLD"
         }
         """
     },
     responses: {
         default: {
-            statusCode: "200"
+            statusCode: "200",
             responseTemplates: {
                 "application/json": """
                 #set($attributes=$input.path('$').Attributes)
@@ -42,12 +38,12 @@ use aws.apigateway#integration
             }
         }
         "400": {
-            statusCode: "400"
+            statusCode: "404"
             responseTemplates: {
-                "application/json": "{\"message\": \"Specified key already exists in the table!\"}"
+                "application/json": "{\"message\": \"No item with the specified id: $method.request.path.itemId!\"}"
             }
             responseParameters: {
-                "method.response.header.x-amzn-ErrorType": "'BadRequestException'",
+                "method.response.header.x-amzn-ErrorType": "'NotFoundException'",
                 "method.response.header.Access-Control-Allow-Headers": "'*'"
             }
         }
@@ -75,7 +71,8 @@ use aws.apigateway#integration
 )
 @examples([
     {
-        title: "example create operation"
+        title: "example delete operation"
+        input: { itemId: "SYHzdEszvHcEiwA=" }
         output: {
             itemId: "SYHzdEszvHcEiwA="
             count: 1
@@ -85,8 +82,15 @@ use aws.apigateway#integration
         }
     }
 ])
-@documentation("Creates an item in the table.")
-@http(code: 200, method: "POST", uri: "/proxy/dynamo/items")
-operation CreateDynamoProxyItem with [BaseOperationErrors] {
+@idempotent
+@documentation("Deletes the item with the specified id.")
+@http(code: 200, method: "DELETE", uri: "/aws/items/dynamo/{itemId}")
+operation DeleteDynamoProxyItem with [BaseOperationErrors] {
+    input := for DynamoProxyItem {
+        @required
+        @httpLabel
+        @documentation("Primary key for the item")
+        $itemId
+    }
     output := for DynamoProxyItem with [DynamoProxyItemElements] {}
 }

@@ -122,7 +122,7 @@ use aws.apigateway#integration
 ])
 @paginated(inputToken: "nextToken", outputToken: "nextToken", items: "items", pageSize: "size")
 @documentation("List all items in the table.")
-@http(code: 200, method: "GET", uri: "/proxy/dynamo/items")
+@http(code: 200, method: "GET", uri: "/aws/items/dynamo")
 operation ListDynamoProxyItems with [BaseOperationErrors] {
     input :=  {
         @documentation("Maximum page size for paginated results")
