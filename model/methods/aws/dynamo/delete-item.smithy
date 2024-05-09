@@ -85,12 +85,12 @@ use aws.apigateway#integration
 @idempotent
 @documentation("Deletes the item with the specified id.")
 @http(code: 200, method: "DELETE", uri: "/aws/items/dynamo/{itemId}")
-operation DeleteDynamoProxyItem with [BaseOperationErrors] {
-    input := for DynamoProxyItem {
+operation DeleteDynamoItem with [BaseOperationErrors] {
+    input := for DynamoItem {
         @required
         @httpLabel
         @documentation("Primary key for the item")
         $itemId
     }
-    output := for DynamoProxyItem with [DynamoProxyItemElements] {}
+    output := with [DynamoItemAttributes] {}
 }

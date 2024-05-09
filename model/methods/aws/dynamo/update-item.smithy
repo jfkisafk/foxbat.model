@@ -89,12 +89,12 @@ use aws.apigateway#integration
 @idempotent
 @documentation("Updates an item with the specified id in the table.")
 @http(code: 200, method: "PUT", uri: "/aws/items/dynamo/{itemId}")
-operation UpdateDynamoProxyItem with [BaseOperationErrors] {
-    input := for DynamoProxyItem {
+operation UpdateDynamoItem with [BaseOperationErrors] {
+    input := for DynamoItem {
         @required
         @httpLabel
         @documentation("Primary key for the item")
         $itemId
     }
-    output := for DynamoProxyItem with [DynamoProxyItemElements] {}
+    output := with [DynamoItemAttributes] {}
 }

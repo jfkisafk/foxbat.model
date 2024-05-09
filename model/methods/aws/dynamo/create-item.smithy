@@ -87,6 +87,6 @@ use aws.apigateway#integration
 ])
 @documentation("Creates an item in the table.")
 @http(code: 200, method: "POST", uri: "/aws/items/dynamo")
-operation CreateDynamoProxyItem with [BaseOperationErrors] {
-    output := for DynamoProxyItem with [DynamoProxyItemElements] {}
+operation CreateDynamoItem with [BaseOperationErrors] {
+    output := with [DynamoItemAttributes] {}
 }

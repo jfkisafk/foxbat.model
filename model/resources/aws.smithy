@@ -5,7 +5,7 @@ namespace dev.stelo.foxbat
 @range(min: 1, max: 100)
 integer PageSize
 
-resource DynamoProxyItem {
+resource DynamoItem {
     identifiers: {
         itemId: NonEmptyString
     }
@@ -17,15 +17,15 @@ resource DynamoProxyItem {
         expiresAt: Long
     }
 
-    create: CreateDynamoProxyItem
-    update: UpdateDynamoProxyItem
-    read: GetDynamoProxyItem
-    delete: DeleteDynamoProxyItem
-    list: ListDynamoProxyItems
+    create: CreateDynamoItem
+    update: UpdateDynamoItem
+    read: GetDynamoItem
+    delete: DeleteDynamoItem
+    list: ListDynamoItems
 }
 
 @mixin
-structure DynamoProxyItemElements for DynamoProxyItem {
+structure DynamoItemAttributes for DynamoItem {
     @required
     @documentation("Primary key for the item")
     $itemId
@@ -47,17 +47,17 @@ structure DynamoProxyItemElements for DynamoProxyItem {
     $lastModifiedAt
 }
 
-structure DynamoProxyListItem for DynamoProxyItem with [DynamoProxyItemElements] {}
+structure DynamoListElement for DynamoItem with [DynamoItemAttributes] {}
 
-list DynamoProxyItemList {
-    member: DynamoProxyListItem
+list DynamoItemList {
+    member: DynamoListElement
 }
 
 enum ContentType {
     APPLICATION_JSON = "application/json"
 }
 
-resource S3ProxyItem {
+resource S3Item {
     identifiers: {
         key: NonEmptyString
     }
@@ -68,12 +68,12 @@ resource S3ProxyItem {
         version: NonEmptyString
     }
 
-    put: PutS3ProxyItem
-    read: GetS3ProxyItem
+    put: PutS3Item
+    read: GetS3Item
 }
 
 @mixin
-structure S3ProxyItemKey for S3ProxyItem {
+structure S3ItemKey for S3Item {
     @required
     @httpLabel
     @documentation("Key for the S3 object")
@@ -81,7 +81,7 @@ structure S3ProxyItemKey for S3ProxyItem {
 }
 
 @mixin
-structure S3ProxyItemContent for S3ProxyItem {
+structure S3ItemContent for S3Item {
     @recommended
     @documentation("Content/data for the object")
     $content

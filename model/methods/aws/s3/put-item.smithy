@@ -52,8 +52,8 @@ use aws.apigateway#integration
 ])
 @documentation("Puts the item in the S3 bucket")
 @http(code: 200, method: "PUT", uri: "/aws/items/s3/{key}")
-operation PutS3ProxyItem with [BaseOperationErrors] {
-    input := for S3ProxyItem with [S3ProxyItemKey, S3ProxyItemContent] {
+operation PutS3Item with [BaseOperationErrors] {
+    input := for S3Item with [S3ItemKey, S3ItemContent] {
         @required
         @httpHeader("Content-Type")
         @documentation("Item mime type")

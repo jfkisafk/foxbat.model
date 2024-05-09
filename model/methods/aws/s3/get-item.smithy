@@ -74,12 +74,12 @@ use aws.apigateway#integration
 ])
 @http(code: 200, method: "GET", uri: "/aws/items/s3/{key}")
 @documentation("Gets the item from S3 bucket")
-operation GetS3ProxyItem with [BaseOperationErrors] {
-    input := for S3ProxyItem with [S3ProxyItemKey] {
+operation GetS3Item with [BaseOperationErrors] {
+    input := for S3Item with [S3ItemKey] {
         @httpQuery("version")
         @documentation("Version for the object")
         $version
     },
-    output := with [S3ProxyItemContent] {}
+    output := with [S3ItemContent] {}
 }
 

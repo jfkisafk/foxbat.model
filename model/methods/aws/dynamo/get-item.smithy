@@ -85,12 +85,12 @@ use aws.apigateway#integration
 ])
 @documentation("Gets the item with the specified id.")
 @http(code: 200, method: "GET", uri: "/aws/items/dynamo/{itemId}")
-operation GetDynamoProxyItem with [BaseOperationErrors] {
-    input := for DynamoProxyItem {
+operation GetDynamoItem with [BaseOperationErrors] {
+    input := for DynamoItem {
         @required
         @httpLabel
         @documentation("Primary key for the item")
         $itemId
     }
-    output := for DynamoProxyItem with [DynamoProxyItemElements] {}
+    output := with [DynamoItemAttributes] {}
 }
