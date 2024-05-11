@@ -15,7 +15,7 @@ use aws.apigateway#integration
         {
             "TableName": "$stageVariables.proxyTableName",
             "Key": { "itemId": { "S": "$method.request.path.itemId" } },
-            "ConditionExpression": "attribute_exists(itemId)"
+            "ConditionExpression": "attribute_exists(itemId)",
             "ReturnValues": "ALL_OLD"
         }
         """

@@ -15,13 +15,13 @@ use aws.apigateway#integration
         {
             "TableName": "$stageVariables.statsTableName",
             "ConsistentRead": "true",
-            #if ($method.request.querystring.size != '')
-            "Limit": $method.request.querystring.size,
-            #else
-            "Limit": 50,
-            #end
             #if ($method.request.querystring.nextToken != '')
             "ExclusiveStartKey": { "itemId": { "S": "$util.base64Decode($method.request.querystring.nextToken)" } },
+            #end
+            #if ($method.request.querystring.size != '')
+            "Limit": $method.request.querystring.size
+            #else
+            "Limit": 50
             #end
         }
         """

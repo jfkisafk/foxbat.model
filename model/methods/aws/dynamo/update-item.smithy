@@ -16,7 +16,7 @@ use aws.apigateway#integration
         {
             "TableName": "$stageVariables.proxyTableName",
             "Key": { "itemId": { "S": "$method.request.path.itemId" } },
-            "ConditionExpression": "attribute_exists(itemId)"
+            "ConditionExpression": "attribute_exists(itemId)",
             "UpdateExpression": "SET #count = if_not_exists(#count, :start) + :inc, #lastModifiedAt = :timestamp, #ttl = :ttl",
             "ExpressionAttributeValues": { ":inc": { "N": "1" }, ":start": { "N": "0" }, ":timestamp": { "S": "$context.requestTime" }, ":ttl": { "N": "$ttl" } },
             "ExpressionAttributeNames": { "#count": "count", "#lastModifiedAt": "lastModifiedAt", "#ttl": "expiresAt" },
