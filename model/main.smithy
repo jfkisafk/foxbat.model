@@ -22,6 +22,6 @@ use aws.protocols#restJson1
 @sigv4(name: "execute-api")
 service Foxbat {
     version: "2018-05-10"
-    operations: [Mock]
+    operations: [Mock, GetFavicon]
     resources: [DynamoItem, S3Item]
 }
