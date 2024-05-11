@@ -12,8 +12,8 @@ resource DynamoItem {
 
     properties: {
         count: Long
-        createdAt: Long
-        lastModifiedAt: Long
+        createdAt: NonEmptyString
+        lastModifiedAt: NonEmptyString
         expiresAt: Long
     }
 

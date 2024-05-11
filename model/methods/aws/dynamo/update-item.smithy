@@ -34,8 +34,8 @@ use aws.apigateway#integration
                 {
                     "itemId": "$attributes.itemId.S",
                     "count": $attributes.count.N,
-                    "createdAt": $attributes.createdAt.N,
-                    "lastModifiedAt": $attributes.lastModifiedAt.N,
+                    "createdAt": "$attributes.createdAt.S",
+                    "lastModifiedAt": "$attributes.lastModifiedAt.S",
                     "expiresAt": $attributes.expiresAt.N
                 }
                 """
@@ -80,8 +80,8 @@ use aws.apigateway#integration
         output: {
             itemId: "SYHzdEszvHcEiwA="
             count: 1
-            createdAt: 1715195898
-            lastModifiedAt: 1715195898
+            createdAt: "11/May/2024:09:57:40 +0000"
+            lastModifiedAt: "11/May/2024:09:57:40 +0000"
             expiresAt: 1715195898
         }
     }
