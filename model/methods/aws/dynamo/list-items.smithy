@@ -13,7 +13,7 @@ use aws.apigateway#integration
     requestTemplates: {
         "application/json": """
         {
-            "TableName": "$stageVariables.statsTableName",
+            "TableName": "$stageVariables.proxyTableName",
             "ConsistentRead": "true",
             #if ($method.request.querystring.nextToken != '')
             "ExclusiveStartKey": { "itemId": { "S": "$util.base64Decode($method.request.querystring.nextToken)" } },
