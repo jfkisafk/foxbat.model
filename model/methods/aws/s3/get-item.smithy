@@ -11,7 +11,7 @@ use aws.apigateway#integration
     credentials: "${ApiExecutionRole.Arn}"
     requestParameters: {
         "integration.request.path.key": "method.request.path.key",
-        "integration.request.querystring.versionId": "method.request.querystring.versionId"
+        "integration.request.querystring.versionId": "method.request.querystring.version"
     },
     responses: {
         default: {
