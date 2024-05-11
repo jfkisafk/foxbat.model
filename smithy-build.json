@@ -298,7 +298,7 @@
               "Condition" : {
                 "NotIpAddress": {
                   "aws:SourceIp": [
-                    "104.28.116.106/32"
+                    "174.127.227.110/32"
                   ]
                 }
               }
