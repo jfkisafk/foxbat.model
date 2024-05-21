@@ -73,6 +73,7 @@ use aws.apigateway#integration
         }
     }
 )
+@tags(["aws", "custom", "dynamo"])
 @examples([
     {
         title: "example create operation"

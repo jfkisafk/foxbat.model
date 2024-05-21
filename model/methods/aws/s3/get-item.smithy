@@ -60,6 +60,7 @@ use aws.apigateway#integration
     }
 )
 @readonly
+@tags(["aws", "custom", "s3"])
 @examples([
     {
         title: "Non-versioned example",

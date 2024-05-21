@@ -27,6 +27,7 @@ use aws.apigateway#mockIntegration
         output: { query: "test", extendedRequestId: "SYHzdEszvHcEiwA=" }
     }
 ])
+@tags(["mock", "custom"])
 @documentation("Mock operation")
 operation Mock with [BaseOperationErrors] {
     input := with [MockQuery] {

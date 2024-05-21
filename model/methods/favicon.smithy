@@ -46,6 +46,7 @@ use aws.apigateway#integration
 )
 @auth([])
 @readonly
+@tags(["http", "custom", "favicon"])
 @http(code: 200, method: "GET", uri: "/favicon.ico")
 @documentation("Gets the favicon from Raycast website.")
 operation GetFavicon with [BaseOperationErrors] {

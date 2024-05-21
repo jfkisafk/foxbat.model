@@ -122,6 +122,7 @@ use aws.apigateway#integration
 ])
 @paginated(inputToken: "nextToken", outputToken: "nextToken", items: "items", pageSize: "size")
 @documentation("List all items in the table.")
+@tags(["aws", "custom", "dynamo"])
 @http(code: 200, method: "GET", uri: "/aws/items/dynamo")
 operation ListDynamoItems with [BaseOperationErrors] {
     input :=  {

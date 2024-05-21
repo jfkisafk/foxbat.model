@@ -25,6 +25,7 @@ use aws.apigateway#integration
         }
     }
 )
+@tags(["http", "custom", "petstore"])
 @readonly
 @examples([
     {

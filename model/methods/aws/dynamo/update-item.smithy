@@ -87,6 +87,7 @@ use aws.apigateway#integration
     }
 ])
 @idempotent
+@tags(["aws", "custom", "dynamo"])
 @documentation("Updates an item with the specified id in the table.")
 @http(code: 200, method: "PUT", uri: "/aws/items/dynamo/{itemId}")
 operation UpdateDynamoItem with [BaseOperationErrors] {

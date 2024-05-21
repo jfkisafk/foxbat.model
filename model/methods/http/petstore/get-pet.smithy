@@ -11,6 +11,7 @@ use aws.apigateway#integration
     requestParameters: { "integration.request.path.id": "method.request.path.petId" }
     responses: { default: { statusCode: "200" } }
 )
+@tags(["http", "custom", "petstore"])
 @readonly
 @examples([
     {

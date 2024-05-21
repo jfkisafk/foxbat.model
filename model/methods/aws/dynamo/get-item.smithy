@@ -83,6 +83,7 @@ use aws.apigateway#integration
         }
     }
 ])
+@tags(["aws", "custom", "dynamo"])
 @documentation("Gets the item with the specified id.")
 @http(code: 200, method: "GET", uri: "/aws/items/dynamo/{itemId}")
 operation GetDynamoItem with [BaseOperationErrors] {

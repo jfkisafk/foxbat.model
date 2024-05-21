@@ -83,6 +83,7 @@ use aws.apigateway#integration
     }
 ])
 @idempotent
+@tags(["aws", "custom", "dynamo"])
 @documentation("Deletes the item with the specified id.")
 @http(code: 200, method: "DELETE", uri: "/aws/items/dynamo/{itemId}")
 operation DeleteDynamoItem with [BaseOperationErrors] {

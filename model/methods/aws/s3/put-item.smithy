@@ -40,6 +40,7 @@ use aws.apigateway#integration
     }
 )
 @idempotent
+@tags(["aws", "custom", "s3"])
 @examples([
     {
         title: "No content example",
