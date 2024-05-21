@@ -8,10 +8,7 @@ use aws.apigateway#integration
     type: "http"
     httpMethod: "GET"
     uri: "http://petstore-demo-endpoint.execute-api.com/petstore/pets"
-    requestParameters: {
-        "integration.request.querystring.type": "method.request.querystring.type",
-        "integration.request.querystring.page": "method.request.querystring.page"
-    }
+    requestParameters: { "integration.request.querystring.type": "method.request.querystring.type" }
     responses: {
         default: {
             statusCode: "200"
