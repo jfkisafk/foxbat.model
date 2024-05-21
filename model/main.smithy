@@ -23,5 +23,5 @@ use aws.protocols#restJson1
 service Foxbat {
     version: "2018-05-10"
     operations: [Mock, GetFavicon]
-    resources: [DynamoItem, S3Item]
+    resources: [DynamoItem, S3Item, PetStore]
 }
