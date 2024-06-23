@@ -6,6 +6,7 @@
       "apiGatewayDefaults": "2023-08-11",
       "keepUnusedComponents": true,
       "forbidGreedyLabels": true,
+      "syncCorsPreflightIntegration": true,
       "tags": true,
       "jsonAdd": {
         "/x-amazon-apigateway-gateway-responses/DEFAULT_4XX/responseTemplates": {
@@ -304,14 +305,7 @@
               }
             }
           ]
-        },
-        "/paths/~1aws~1items~1dynamo/options/x-amazon-apigateway-integration/passthroughBehavior": "never",
-        "/paths/~1aws~1items~1dynamo~1{itemId}/options/x-amazon-apigateway-integration/passthroughBehavior": "never",
-        "/paths/~1aws~1items~1s3~1{key}/options/x-amazon-apigateway-integration/passthroughBehavior": "never",
-        "/paths/~1favicon.ico/options/x-amazon-apigateway-integration/passthroughBehavior": "never",
-        "/paths/~1mock/options/x-amazon-apigateway-integration/passthroughBehavior": "never",
-        "/paths/~1pets/options/x-amazon-apigateway-integration/passthroughBehavior": "never",
-        "/paths/~1pets~1{petId}/options/x-amazon-apigateway-integration/passthroughBehavior": "never"
+        }
       }
     }
   }
