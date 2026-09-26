@@ -17,6 +17,8 @@ resource PetStore {
 }
 
 structure PetError {
+    // Backend error key, unrelated to S3Item's `key` identifier.
+    @suppress(["MemberShouldReferenceResource"])
     @required
     @documentation("Error key")
     key: NonEmptyString
