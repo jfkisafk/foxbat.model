@@ -10,20 +10,18 @@ use aws.apigateway#integration
     uri: "arn:aws:apigateway:${AWS::Region}:s3:path/${Bucket}/{key}"
     credentials: "${ApiExecutionRole.Arn}"
     requestParameters: {
-        "integration.request.path.key": "method.request.path.key",
+        "integration.request.path.key": "method.request.path.key"
         "integration.request.header.Content-Type": "method.request.header.Content-Type"
-    },
+    }
     responses: {
-        default: {
-            statusCode: "200"
-        }
+        default: { statusCode: "200" }
         "429": {
             statusCode: "429"
             responseTemplates: {
                 "application/json": "{\"message\": \"Rate limit exceeded for the operation (throttled).\"}"
             }
             responseParameters: {
-                "method.response.header.x-amzn-ErrorType": "'ThrottledException'",
+                "method.response.header.x-amzn-ErrorType": "'ThrottledException'"
                 "method.response.header.Access-Control-Allow-Headers": "'*'"
             }
         }
@@ -33,7 +31,7 @@ use aws.apigateway#integration
                 "application/json": "{\"message\": \"Internal Server Error. Please contact the service team with the request parameters and these response header values: date, x-amzn-requestid and x-amzn-errortype\"}"
             }
             responseParameters: {
-                "method.response.header.x-amzn-ErrorType": "'InternalServerErrorException'",
+                "method.response.header.x-amzn-ErrorType": "'InternalServerErrorException'"
                 "method.response.header.Access-Control-Allow-Headers": "'*'"
             }
         }
@@ -43,11 +41,11 @@ use aws.apigateway#integration
 @tags(["aws", "custom", "s3"])
 @examples([
     {
-        title: "No content example",
+        title: "No content example"
         input: { key: "test.json", contentType: "application/json" }
-    },
+    }
     {
-        title: "Content example",
+        title: "Content example"
         input: { key: "test.json", contentType: "application/json", content: "{\"abc\": 456}" }
     }
 ])

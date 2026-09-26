@@ -3,15 +3,15 @@ $version: "2"
 namespace dev.stelo.foxbat
 
 resource PetStore {
-    identifiers: { petId: String }
-
+    identifiers: {
+        petId: String
+    }
     properties: {
         id: Integer
         type: NonEmptyString
         price: Double
         errors: PetErrorList
     }
-
     read: GetPet
     list: ListPets
 }

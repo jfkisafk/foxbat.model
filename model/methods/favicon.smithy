@@ -9,16 +9,12 @@ use aws.apigateway#integration
     httpMethod: "GET"
     uri: "https://www.raycast.com/favicon-production.png"
     responses: {
-        default: {
-            statusCode: "200"
-        }
+        default: { statusCode: "200" }
         "404": {
             statusCode: "404"
-            responseTemplates: {
-                "application/json": "{\"message\": \"The requested resource was not found.\"}"
-            }
+            responseTemplates: { "application/json": "{\"message\": \"The requested resource was not found.\"}" }
             responseParameters: {
-                "method.response.header.x-amzn-ErrorType": "'NotFoundException'",
+                "method.response.header.x-amzn-ErrorType": "'NotFoundException'"
                 "method.response.header.Access-Control-Allow-Headers": "'*'"
             }
         }
@@ -28,7 +24,7 @@ use aws.apigateway#integration
                 "application/json": "{\"message\": \"Rate limit exceeded for the operation (throttled).\"}"
             }
             responseParameters: {
-                "method.response.header.x-amzn-ErrorType": "'ThrottledException'",
+                "method.response.header.x-amzn-ErrorType": "'ThrottledException'"
                 "method.response.header.Access-Control-Allow-Headers": "'*'"
             }
         }
@@ -38,7 +34,7 @@ use aws.apigateway#integration
                 "application/json": "{\"message\": \"Internal Server Error. Please contact the service team with the request parameters and these response header values: date, x-amzn-requestid and x-amzn-errortype\"}"
             }
             responseParameters: {
-                "method.response.header.x-amzn-ErrorType": "'InternalServerErrorException'",
+                "method.response.header.x-amzn-ErrorType": "'InternalServerErrorException'"
                 "method.response.header.Access-Control-Allow-Headers": "'*'"
             }
         }
@@ -58,4 +54,3 @@ operation GetFavicon with [BaseOperationErrors] {
 
 @mediaType("image/*")
 blob Favicon
-

@@ -6,9 +6,7 @@ use aws.apigateway#mockIntegration
 
 @mockIntegration(
     passThroughBehavior: "never"
-    requestTemplates: {
-        "application/json": "{\"statusCode\": 200}"
-    }
+    requestTemplates: { "application/json": "{\"statusCode\": 200}" }
     responses: {
         default: {
             statusCode: "200"
@@ -36,6 +34,7 @@ operation Mock with [BaseOperationErrors] {
         @documentation("Query for the mock call")
         query: NonEmptyString
     }
+
     output := with [MockQuery] {
         @required
         @documentation("Extended RequestId for the mock call")
@@ -49,4 +48,3 @@ structure MockQuery {
     @documentation("Query for the mock call")
     query: NonEmptyString
 }
-

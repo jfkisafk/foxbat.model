@@ -9,14 +9,12 @@ resource DynamoItem {
     identifiers: {
         itemId: NonEmptyString
     }
-
     properties: {
         count: Long
         createdAt: NonEmptyString
         lastModifiedAt: NonEmptyString
         expiresAt: Long
     }
-
     create: CreateDynamoItem
     update: UpdateDynamoItem
     read: GetDynamoItem
@@ -61,13 +59,11 @@ resource S3Item {
     identifiers: {
         key: NonEmptyString
     }
-
     properties: {
         content: NonEmptyString
         contentType: ContentType
         version: NonEmptyString
     }
-
     put: PutS3Item
     read: GetS3Item
 }

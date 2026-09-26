@@ -14,10 +14,10 @@ use aws.apigateway#integration
             statusCode: "200"
             responseTemplates: {
                 "application/json": """
-                {
-                  "pets": $input.json('$')
-                }
-                """
+                    {
+                      "pets": $input.json('$')
+                    }
+                    """
             }
         }
     }
@@ -46,7 +46,7 @@ use aws.apigateway#integration
                 }
             ]
         }
-    },
+    }
     {
         title: "example with queries"
         input: { type: "bird" }
@@ -55,7 +55,7 @@ use aws.apigateway#integration
                 {
                     id: 1
                     type: "bird"
-                    "price": 999.99
+                    price: 999.99
                 }
                 {
                     id: 2
@@ -68,7 +68,6 @@ use aws.apigateway#integration
                     price: 49.97
                 }
             ]
-
         }
     }
 ])
@@ -81,6 +80,7 @@ operation ListPets with [BaseOperationErrors] {
         @httpQuery("type")
         $type
     }
+
     output := {
         @required
         @documentation("Pets from the petstore")
